@@ -5,22 +5,22 @@ class Stopwatch {
   start(callback = () => {}) {
     this.#intervalId = setInterval(() => {
       this.#elapsedTimeInSeconds++;
-      callback()
+      callback();
     }, 1000);
   }
 
   stop(callback = () => {}) {
     clearInterval(this.#intervalId);
-    callback()
+    callback();
   }
 
   reset(callback = () => {}) {
     this.#elapsedTimeInSeconds = 0;
-    callback()
+    callback();
   }
 
   get elapsedTime() {
-    return Stopwatch.formatTime(this.#elapsedTimeInSeconds)
+    return Stopwatch.formatTime(this.#elapsedTimeInSeconds);
   }
 
   static formatTime(timeInSeconds) {
@@ -28,7 +28,9 @@ class Stopwatch {
     const minutes = Math.floor((timeInSeconds % 3600) / 60);
     const seconds = timeInSeconds - hours * 3600 - minutes * 60;
 
-    return `${Stopwatch.zeroPadding(hours)}:${Stopwatch.zeroPadding(minutes)}:${Stopwatch.zeroPadding(seconds)}`;
+    return `${Stopwatch.zeroPadding(hours)}:${Stopwatch.zeroPadding(
+      minutes
+    )}:${Stopwatch.zeroPadding(seconds)}`;
   }
 
   static zeroPadding(originalNumber, desireAmountDigits = 2) {
@@ -46,23 +48,23 @@ class Stopwatch {
     return stringNumber;
   }
 }
-const startBtn = document.getElementById('start')
-const stopBtn = document.getElementById('stop')
-const resettBtn = document.getElementById('reset')
-const stopwatchDisplay = document.getElementById('stopwatch-display')
+const startBtn = document.getElementById("start");
+const stopBtn = document.getElementById("stop");
+const resettBtn = document.getElementById("reset");
+const stopwatchDisplay = document.getElementById("stopwatch-display");
 
-function updateDisplay(){
-  stopwatchDisplay.innerText = sw1.elapsedTime
+function updateDisplay() {
+  stopwatchDisplay.innerText = sw1.elapsedTime;
 }
 
 const sw1 = new Stopwatch();
 
-startBtn.addEventListener('click', () => {
-  sw1.start(updateDisplay)  
-})
-stopBtn.addEventListener('click', () => {
-  sw1.stop()
-})
-resettBtn.addEventListener('click', () => {
-  sw1.reset(updateDisplay)
-})
+startBtn.addEventListener("click", () => {
+  sw1.start(updateDisplay);
+});
+stopBtn.addEventListener("click", () => {
+  sw1.stop();
+});
+resettBtn.addEventListener("click", () => {
+  sw1.reset(updateDisplay);
+});
